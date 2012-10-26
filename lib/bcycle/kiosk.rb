@@ -40,6 +40,10 @@ module Bcycle
       end
     end
 
+    def address
+      "#{@street}, #{@city}, #{@state} #{@zip}"
+    end
+
     def latlng
       [ @lat, @lng ]
     end
