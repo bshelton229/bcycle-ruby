@@ -1,6 +1,6 @@
-# Bcycle
+# Bcycle (Ruby)
 
-A very simple Ruby library for accessing the B-Cycle API. This is a work in progress at this point.
+A very simple Ruby library for accessing the B-Cycle API; a work in progress.
 
 ## Installation
 
