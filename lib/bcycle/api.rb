@@ -9,6 +9,12 @@ module Bcycle
         remote_data["d"]["list"].map { |kiosk| Kiosk.new(kiosk) }
       end
 
+      # Find a single kiosk or nil
+      def find(o)
+        id = o.kind_of?(Bcycle::Kiosk) ? o.id.to_i : o.to_i
+        kiosks.select { |k| k.id.to_i == id }.first
+      end
+
       # Remote API data
       def remote_data
         # TODO: Error handling

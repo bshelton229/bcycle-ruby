@@ -8,4 +8,8 @@ module Bcycle
   def self.kiosks
     Api.kiosks
   end
+
+  def self.find(o)
+    Api.find(o)
+  end
 end
