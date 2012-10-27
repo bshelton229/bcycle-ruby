@@ -55,5 +55,9 @@ module Bcycle
     def is_event_based?
       @is_event_based ? true : false
     end
+
+    def to_json(*a)
+      @attributes.merge({ :latlng => latlng }).to_json(*a)
+    end
   end
 end

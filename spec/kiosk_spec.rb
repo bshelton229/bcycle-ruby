@@ -15,4 +15,9 @@ describe Bcycle::Kiosk do
   it "Should not add attributes to the attributes array" do
     @kiosk.attributes.keys.should_not include("attributes")
   end
+
+  it "Should represent a json version of itself" do
+    j = JSON.parse( @kiosk.to_json )
+    j["latlng"].should be_an(Array)
+  end
 end
