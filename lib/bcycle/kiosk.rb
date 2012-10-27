@@ -52,6 +52,15 @@ module Bcycle
       @status == 'Active'
     end
 
+    def ==(*args)
+      if args.first.kind_of?(Bcycle::Kiosk)
+        k = args.first
+        k.id == self.id
+      else
+        super
+      end
+    end
+
     def is_event_based?
       @is_event_based ? true : false
     end

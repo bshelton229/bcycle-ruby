@@ -20,4 +20,13 @@ describe Bcycle::Kiosk do
     j = JSON.parse( @kiosk.to_json )
     j["latlng"].should be_an(Array)
   end
+
+  it "Should be able to realize equality" do
+    k1 = Bcycle.kiosks.first
+    k2 = Bcycle.kiosks.first
+    k3 = Bcycle.kiosks.last
+
+    k2.should eq(k1)
+    k1.should_not eq(k3)
+  end
 end
