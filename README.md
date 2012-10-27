@@ -6,27 +6,23 @@ A very simple Ruby library for accessing the B-Cycle API; a work in progress.
 
 Add this line to your application's Gemfile:
 
-    gem 'bcycle'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install bcycle
+    gem 'bcycle', :git => 'git://github.com/bshelton229/bcycle-ruby.git'
 
 ## Usage
 
-    require 'bcycle'
+**Load All Kiosks**
 
-    # Return all Kiosks (The API can only return all kiosks)
-    # This will return an Array of Bcycle::Kiosk objects
     Bcycle.kiosks
-    => [#<Bcycle::Kiosk:0x007f9efbdde838 @name=".....
+    => [#<Bcycle::Kiosk:0x007f981c012a78 @id=1645, @name="250 Columbine ", @status="Active"...
 
-    # Filter the kiosks (TODO: Add filter methods to Bcycle::Api)
-    Bcycle.kiosks.select { |kiosk| kiosk.state == 'WI' and kiosk.active? }
+**To filter kiosks, just use ruby Array's select (The api can't access indidivual records)**
+
+    Bcycle.kiosks.select { |kiosk| kiosk.state == 'WI' and  kiosk.city == 'Madison' and kiosk.active? }
+
+**You can find a particular kiosk**
+
+    Bcycle.find 1874
+    => #<Bcycle::Kiosk:0x007f981b1760c8 @id=1874, @name="Wisconsin & E. Mifflin", @status="Active"......
 
 ## Contributing
 
