@@ -22,4 +22,6 @@ Gem::Specification.new do |gem|
 
   # Development Dependencies
   gem.add_development_dependency('rspec')
+  gem.add_development_dependency('vcr')
+  gem.add_development_dependency('webmock')
 end
