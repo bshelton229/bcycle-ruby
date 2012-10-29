@@ -23,11 +23,11 @@ module Bcycle
       o = {}
 
       # General Attributes
-      o["id"] = a["Id"] || a["id"]
+      o["id"] = a["Id"] || a["id"].to_i
       o["name"] = a["Name"] || a["name"]
       o["status"] = a["Status"] || a["status"]
-      o["bikes_available"] = a["BikesAvailable"] || a["bikes_available"]
-      o["docks_available"] = a["DocksAvailable"] || a["docks_available"]
+      o["bikes_available"] = a["BikesAvailable"] || a["bikes_available"].to_i
+      o["docks_available"] = a["DocksAvailable"] || a["docks_available"].to_i
       o["hours_of_operation"] = a["HoursOfOperation"] || a["hours_of_operation"]
 
       o["is_event_based"] = a["IsEventBased"].nil? ? ( o["is_event_based"] || false ) : a["IsEventBased"]
