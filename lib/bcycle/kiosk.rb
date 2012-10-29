@@ -37,8 +37,8 @@ module Bcycle
       o["time_zone"] = a["TimeZone"] || a["time_zone"]
 
       # Location
-      o["lat"] = a["Location"] ? a["Location"]["Latitude"] : a["lat"]
-      o["lng"] = a["Location"] ? a["Location"]["Longitude"] : a["lng"]
+      o["lat"] = a["Location"] ? a["Location"]["Latitude"] : a["lat"].to_f
+      o["lng"] = a["Location"] ? a["Location"]["Longitude"] : a["lng"].to_f
 
       # Address
       o["city"] = a["Address"] ? a["Address"]["City"] : a["city"]
@@ -74,8 +74,12 @@ module Bcycle
       @is_event_based ? true : false
     end
 
+    def as_json(opts={})
+      @attributes.merge({ :latlng => latlng })
+    end
+
     def to_json(*a)
-      @attributes.merge({ :latlng => latlng }).to_json(*a)
+      as_json.to_json(*a)
     end
   end
 end
