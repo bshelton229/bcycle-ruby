@@ -10,34 +10,43 @@ module Bcycle
     attr_reader :attributes
 
     def initialize(attrs={})
-      # General
-      @id = attrs["Id"]
-      @name = attrs["Name"]
-      @status = attrs["Status"]
-      @bikes_available = attrs["BikesAvailable"]
-      @docks_available = attrs["DocksAvailable"]
-      @hours_of_operation = attrs["HoursOfOperation"]
-      @is_event_based = attrs["IsEventBased"]
-      @public_text = attrs["PublicText"]
-      @total_docks = attrs["TotalDocks"]
-      @time_zone = attrs["TimeZone"]
+      @attributes = normalize_attributes(attrs)
+      @attributes.each do |name, value|
+        instance_variable_set "@#{name}", value
+      end
+    end
+
+    # Normalize attributes
+    # This will also detect whether or not we're rebuilding from a serialized
+    # Bcycle::Kiosk or from the API response
+    def normalize_attributes(a)
+      o = {}
+
+      # General Attributes
+      o["id"] = a["Id"] || a["id"]
+      o["name"] = a["Name"] || a["name"]
+      o["status"] = a["Status"] || a["status"]
+      o["bikes_available"] = a["BikesAvailable"] || a["bikes_available"]
+      o["docks_available"] = a["DocksAvailable"] || a["docks_available"]
+      o["hours_of_operation"] = a["HoursOfOperation"] || a["hours_of_operation"]
+
+      o["is_event_based"] = a["IsEventBased"].nil? ? ( o["is_event_based"] || false ) : a["IsEventBased"]
+
+      o["public_text"] = a["PublicText"] || a["public_text"]
+      o["total_docks"] = a["TotalDocks"] || a["total_docks"]
+      o["time_zone"] = a["TimeZone"] || a["time_zone"]
 
       # Location
-      @lat = attrs["Location"]["Latitude"]
-      @lng = attrs["Location"]["Longitude"]
+      o["lat"] = a["Location"] ? a["Location"]["Latitude"] : a["lat"]
+      o["lng"] = a["Location"] ? a["Location"]["Longitude"] : a["lng"]
 
       # Address
-      @city = attrs["Address"]["City"]
-      @state = attrs["Address"]["State"].upcase
-      @street = attrs["Address"]["Street"]
-      @zip = attrs["Address"]["ZipCode"]
+      o["city"] = a["Address"] ? a["Address"]["City"] : a["city"]
+      o["state"] = a["Address"] ? a["Address"]["State"].upcase : a["state"]
+      o["street"] = a["Address"] ? a["Address"]["Street"].upcase : a["street"]
+      o["zip"] = a["Address"] ? a["Address"]["ZipCode"].upcase : a["zip"]
 
-      # Set attributes from defined instance variables
-      @attributes = {}
-      self.instance_variables.each do |i|
-        i = i.to_s.gsub(/^@/, '')
-        @attributes[i] = send(i.to_sym) if i != "attributes"
-      end
+      o
     end
 
     def address
