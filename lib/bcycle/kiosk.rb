@@ -33,7 +33,7 @@ module Bcycle
       o["is_event_based"] = a["IsEventBased"].nil? ? ( o["is_event_based"] || false ) : a["IsEventBased"]
 
       o["public_text"] = a["PublicText"] || a["public_text"]
-      o["total_docks"] = a["TotalDocks"] || a["total_docks"]
+      o["total_docks"] = a["TotalDocks"] || a["total_docks"].to_i
       o["time_zone"] = a["TimeZone"] || a["time_zone"]
 
       # Location
