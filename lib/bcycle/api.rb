@@ -1,7 +1,9 @@
-require 'open-uri'
+require 'faraday'
+
 module Bcycle
   class Api
     URI = 'http://api.bcycle.com/Services/Mobile.svc/ListKiosks'
+
     class << self
       # Get all the kiosks from the API and return Bcycle::Kiosk objects
       # for each one
@@ -17,8 +19,14 @@ module Bcycle
 
       # Remote API data
       def remote_data
-        # TODO: Error handling
-        JSON.parse(open(URI).read)
+        resp = conn.get do |req|
+          req.options[:timeout] = 10
+        end
+        JSON.parse resp.body
+      end
+
+      def conn
+        Faraday.new( :url => URI )
       end
     end
   end

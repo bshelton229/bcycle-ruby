@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
 
   # Dependencies
   gem.add_dependency('json')
+  gem.add_dependency('faraday', '~> 0.8')
 
   # Development Dependencies
   gem.add_development_dependency('rspec')
