@@ -1,4 +1,5 @@
 require 'faraday'
+require 'multi_json'
 
 module Bcycle
   class Api
@@ -22,7 +23,7 @@ module Bcycle
         resp = conn.get do |req|
           req.options[:timeout] = 10
         end
-        JSON.parse resp.body
+        MultiJson.load resp.body
       end
 
       def conn

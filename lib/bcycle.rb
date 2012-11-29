@@ -1,5 +1,3 @@
-require 'json'
-require 'open-uri'
 require "bcycle/version"
 require "bcycle/kiosk"
 require "bcycle/api"
