@@ -1,4 +1,4 @@
-# Bcycle (Ruby)
+# B-cycle (Ruby)
 
 A very simple Ruby library for accessing the B-Cycle API; a work in progress.
 
