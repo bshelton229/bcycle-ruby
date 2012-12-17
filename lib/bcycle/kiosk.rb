@@ -75,7 +75,7 @@ module Bcycle
     end
 
     def as_json(opts={})
-      @attributes.merge({ :latlng => latlng })
+      @attributes.merge({ :latlng => latlng, :active => self.active? })
     end
 
     def to_json(*a)
