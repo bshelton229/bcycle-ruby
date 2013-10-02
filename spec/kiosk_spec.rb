@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Bcycle::Kiosk do
-  use_vcr_cassette "bcycle", :allow_playback_repeats => true
+describe Bcycle::Kiosk, :vcr => true do
+  # use_vcr_cassette "bcycle", :allow_playback_repeats => true
 
   it "Should provides attributes" do
 
